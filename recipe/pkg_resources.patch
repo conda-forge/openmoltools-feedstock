@@ -1,0 +1,22 @@
+diff --git a/openmoltools/utils.py b/openmoltools/utils.py
+index e41fb1c..3d79e3c 100644
+--- a/openmoltools/utils.py
++++ b/openmoltools/utils.py
+@@ -6,7 +6,7 @@ import tempfile
+ import logging
+ import subprocess
+ import functools
+-from pkg_resources import resource_filename
++from importlib.resources import files as importlib_files
+ import contextlib
+ import shutil
+ import warnings
+@@ -270,7 +270,7 @@ def get_data_filename(relative_path):
+ 
+     """
+ 
+-    fn = resource_filename('openmoltools', relative_path)
++    fn = importlib_files('openmoltools') / relative_path
+ 
+     if not os.path.exists(fn):
+         raise ValueError("Sorry! %s does not exist. If you just added it, you'll have to re-install" % fn)
