@@ -10,18 +10,20 @@ source:
   sha256: e808b8f8696ed42367e33c28b01f893783126212580e64472c810b970a610b1a
   patches:
     - setup.patch
+    - pkg_resources.patch
 
 build:
   noarch: python
-  number: 1
+  number: 2
   script: "{{ PYTHON }} -m pip install . -vv --no-deps"
 
 requirements:
   host:
-    - python >=3.6
+    - python {{ python_min }}
     - pip
+    - setuptools
   run:
-    - python >=3.6
+    - python >={{ python_min }}
     - pandas
     - six
     - mdtraj
@@ -33,6 +35,8 @@ requirements:
     - pytables
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - openmoltools
 
